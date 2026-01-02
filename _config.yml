@@ -1,4 +1,8 @@
-theme: jekyll-theme-minimal
-title: Dining Management - Hazrat Uthman (R) Hall
-description: A comprehensive guide to dining management at Hazrat Uthman (R) Hall.
-author: A A R Farabi, a border of Hazrat Uthman (R) Hall
+---
+layout: default
+title: Dining Management Calculator
+subtitle: Hazrat Uthman (R) Hall
+description: An automated tool to calculate meal rates and manage dining accounts for residents.
+author: A A R Farabi
+affiliation: Resident, Hazrat Uthman (R) Hall
+---
