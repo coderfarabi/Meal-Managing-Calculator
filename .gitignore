@@ -1,0 +1,5 @@
+node_modules
+dist
+*.local
+index.backup.html
+.DS_Store
