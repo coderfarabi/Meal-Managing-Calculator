@@ -46,6 +46,11 @@ input:focus, select:focus {
 .go-bottom { bottom: 20px; }
 
 @media print {
+    @page {
+        size: landscape;
+        margin: 0.5cm;
+    }
+
     .no-print { display: none !important; }
 
     body {
@@ -64,6 +69,28 @@ input:focus, select:focus {
 
     body.print-ledger .hide-on-ledger {
         display: none !important;
+    }
+
+    #data-table-container {
+        max-height: none !important;
+        overflow: visible !important;
+    }
+
+    #data-table-container table {
+        font-size: 7pt !important;
+    }
+
+    #data-table-container th,
+    #data-table-container td {
+        padding: 1px 3px !important;
+        font-size: 7pt !important;
+        line-height: 1.05 !important;
+    }
+
+    #data-table-container input {
+        padding: 0 !important;
+        height: auto !important;
+        font-size: 7pt !important;
     }
 
     table {
