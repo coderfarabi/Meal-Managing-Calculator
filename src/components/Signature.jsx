@@ -21,6 +21,7 @@ export default function Signature({ sigPrepared, setSigPrepared, sigVerified, se
         />
         <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 group-hover:text-slate-900">Hall Auditor</p>
       </div>
+      <p className="col-span-full text-center text-[9px] text-slate-400 mt-8">A A R Farabi</p>
     </div>
   );
 }

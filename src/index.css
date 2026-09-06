@@ -104,10 +104,33 @@ input:focus, select:focus {
         padding: 4px !important;
     }
 
-    .summary-grid {
-        display: flex !important;
-        flex-wrap: wrap !important;
-        gap: 10px !important;
+    .summary-grid:not(.no-print) {
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 8px !important;
+        margin-bottom: 12px !important;
+    }
+
+    .summary-grid > div,
+    .summary-grid > div input {
+        padding: 6px 8px !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        border: 1px solid #000 !important;
+        background: #fff !important;
+        color: #000 !important;
+    }
+
+    .summary-grid > div > p {
+        font-size: 6pt !important;
+        margin-bottom: 2px !important;
+        color: #000 !important;
+    }
+
+    .summary-grid > div > div,
+    .summary-grid > div > input {
+        font-size: 11pt !important;
+        color: #000 !important;
     }
 }
 

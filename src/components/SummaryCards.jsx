@@ -12,12 +12,12 @@ export default function SummaryCards({
   totalRefund,
 }) {
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 mb-8 hide-on-ledger">
-      <div className="bg-slate-900 p-5 rounded-2xl shadow-sm no-print">
+    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 mb-8 summary-grid">
+      <div className="bg-slate-900 p-5 rounded-2xl shadow-sm">
         <p className="text-[11px] font-black text-slate-400 uppercase tracking-wider mb-1">Total Deposit</p>
         <div id="display-td" className="text-2xl font-black text-white">{totalDeposit.toLocaleString(undefined, { minimumFractionDigits: 2 })}</div>
       </div>
-      <div className="bg-indigo-600 p-5 rounded-2xl shadow-lg no-print">
+      <div className="bg-indigo-600 p-5 rounded-2xl shadow-lg">
         <p className="text-[11px] font-black text-indigo-200 uppercase tracking-wider mb-1">Total Meal</p>
         <div id="display-tm" className="text-2xl font-black text-white">{totalM.toFixed(1)}</div>
       </div>
@@ -33,7 +33,7 @@ export default function SummaryCards({
         <p className="text-[11px] font-black text-slate-400 uppercase tracking-wider mb-1">Remaining Bazaar</p>
         <input type="number" id="input-sb" value={remainingBazaar} onChange={e => setRemainingBazaar(e.target.value)} className="w-full bg-transparent text-2xl font-black text-[#966F33] placeholder:text-[#966F33]" placeholder="0" />
       </div>
-      <div className="bg-slate-900 p-5 rounded-2xl shadow-sm no-print">
+      <div className="bg-slate-900 p-5 rounded-2xl shadow-sm">
         <p className="text-[11px] font-black text-slate-400 uppercase tracking-wider mb-1">Meal Rate</p>
         <div id="display-mr" className="text-2xl font-black text-white">{mealRate.toFixed(4)}</div>
       </div>
