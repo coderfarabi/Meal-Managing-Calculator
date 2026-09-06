@@ -1,4 +1,13 @@
-export default function DataTable({ rows, updateData, totals }) {
+export default function DataTable({ rows, updateData, totals, trimTrailingEmpty }) {
+  let visibleRows = rows;
+  if (trimTrailingEmpty) {
+    let last = rows.length - 1;
+    while (last >= 0 && (rows[last].meals == null || rows[last].meals === '') && (rows[last].deposit == null || rows[last].deposit === '')) {
+      last--;
+    }
+    visibleRows = last >= 0 ? rows.slice(0, last + 1) : [];
+  }
+
   return (
     <div id="data-table-container" className="overflow-hidden rounded-2xl border border-slate-200 mb-8 shadow-xl max-h-[500px] overflow-y-auto">
       <table className="w-full relative">
@@ -12,7 +21,7 @@ export default function DataTable({ rows, updateData, totals }) {
           </tr>
         </thead>
         <tbody id="member-body" className="divide-y divide-slate-100">
-          {rows.map((m, i) => (
+          {visibleRows.map((m, i) => (
             <tr key={m.id} className="hover:bg-slate-50 transition-colors group">
               <td className="p-3 text-center text-slate-400 font-bold text-xs border-r border-slate-100">{i + 1}</td>
               <td className="p-0 hide-on-ledger">

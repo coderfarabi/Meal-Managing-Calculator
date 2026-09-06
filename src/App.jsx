@@ -41,6 +41,7 @@ export default function App() {
   const [showAlert, setShowAlert] = useState(false);
   const [alertMsg, setAlertMsg] = useState('');
   const [showConfirm, setShowConfirm] = useState(false);
+  const [printMode, setPrintMode] = useState(false);
 
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify({
@@ -54,6 +55,13 @@ export default function App() {
       year,
     }));
   }, [members, totalBazaar, guestIncome, remainingBazaar, sigPrepared, sigVerified, month, year]);
+
+  useEffect(() => {
+    if (!printMode) return;
+    window.print();
+    document.body.classList.remove('print-ledger');
+    setPrintMode(false);
+  }, [printMode]);
 
   const tb = parseFloat(totalBazaar) || 0;
   const tgm = parseFloat(guestIncome) || 0;
@@ -168,10 +176,7 @@ export default function App() {
       document.body.classList.add('print-ledger');
     }
 
-    window.print();
-    setTimeout(() => {
-      document.body.classList.remove('print-ledger');
-    }, 1);
+    setPrintMode(true);
   }
 
   return (
@@ -205,7 +210,7 @@ export default function App() {
               showResetConfirm={() => setShowConfirm(true)}
             />
 
-            <DataTable rows={rows} updateData={updateData} totals={{ totalM, totalD, totalE, totalS }} />
+            <DataTable rows={rows} updateData={updateData} totals={{ totalM, totalD, totalE, totalS }} trimTrailingEmpty={printMode} />
 
             <div className="no-print mb-12 flex justify-center">
               <button onClick={addRow} className="bg-white border-2 border-slate-200 text-slate-700 px-10 py-3 rounded-2xl font-black text-xs uppercase tracking-widest hover:border-indigo-600 hover:text-indigo-600 transition-all shadow-sm">
@@ -216,7 +221,7 @@ export default function App() {
             <Signature sigPrepared={sigPrepared} setSigPrepared={setSigPrepared} sigVerified={sigVerified} setSigVerified={setSigVerified} />
           </div>
         </div>
-        <p className="text-center text-slate-400 text-[10px] mt-8 uppercase font-bold tracking-widest no-print">Built for Excellence — Hazrat Uthman (R) Hall, IIUC, Kumira</p>
+        
       </main>
 
       <Modals
