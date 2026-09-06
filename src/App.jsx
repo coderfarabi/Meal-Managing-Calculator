@@ -157,6 +157,59 @@ export default function App() {
     reader.readAsArrayBuffer(file);
   }
 
+  function handleExportData() {
+    const data = {
+      members,
+      totalBazaar,
+      guestIncome,
+      remainingBazaar,
+      sigPrepared,
+      sigVerified,
+      month,
+      year,
+    };
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const now = new Date();
+    const ts = [
+      now.getFullYear(),
+      String(now.getMonth() + 1).padStart(2, '0'),
+      String(now.getDate()).padStart(2, '0'),
+      String(now.getHours()).padStart(2, '0'),
+      String(now.getMinutes()).padStart(2, '0'),
+      String(now.getSeconds()).padStart(2, '0'),
+    ].join('-');
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `meal-data-${MONTHS[month].toLowerCase()}-${year}-${ts}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  function handleImportFile(file) {
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+      try {
+        const data = JSON.parse(e.target.result);
+        setMembers(Array.isArray(data.members) ? data.members : defaultMembers());
+        setTotalBazaar(data.totalBazaar ?? '');
+        setGuestIncome(data.guestIncome ?? '');
+        setRemainingBazaar(data.remainingBazaar ?? '');
+        setSigPrepared(data.sigPrepared ?? '');
+        setSigVerified(data.sigVerified ?? '');
+        if (typeof data.month === 'number') setMonth(data.month);
+        if (typeof data.year === 'number') setYear(data.year);
+        setAlertMsg("Backup restored successfully.");
+        setShowAlert(true);
+      } catch {
+        setAlertMsg("Could not read the backup file. Please choose a valid JSON backup.");
+        setShowAlert(true);
+      }
+    };
+    reader.readAsText(file);
+  }
+
   function handlePrint(type) {
     if (type === 'full') {
       const sigs = [sigPrepared, sigVerified];
@@ -208,6 +261,8 @@ export default function App() {
               processTextImport={processTextImport}
               handleFile={handleFile}
               showResetConfirm={() => setShowConfirm(true)}
+              onExport={handleExportData}
+              onImportFile={handleImportFile}
             />
 
             <DataTable rows={rows} updateData={updateData} totals={{ totalM, totalD, totalE, totalS }} trimTrailingEmpty={printMode} />

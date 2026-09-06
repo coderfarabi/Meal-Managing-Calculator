@@ -1,6 +1,6 @@
 export default function Signature({ sigPrepared, setSigPrepared, sigVerified, setSigVerified }) {
   return (
-    <div className="grid grid-cols-2 gap-12 mt-20 pt-10 border-t border-slate-100">
+    <div className="grid grid-cols-2 gap-12 mt-20 pt-10 border-t border-slate-100 sig-row">
       <div className="text-center group">
         <input
           type="text"

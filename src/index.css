@@ -47,24 +47,48 @@ input:focus, select:focus {
 
 @media print {
     @page {
-        size: landscape;
+        size: A4 portrait;
         margin: 0.5cm;
     }
 
     .no-print { display: none !important; }
 
-    body {
-        background: white !important;
+    html, body {
         margin: 0 !important;
         padding: 0 !important;
+        height: auto !important;
+        min-height: 0 !important;
+        width: 100% !important;
+        background: white !important;
+    }
+
+    main {
+        padding: 0 !important;
+        margin: 0 !important;
+        max-width: 100% !important;
     }
 
     .main-container {
         box-shadow: none !important;
         border: none !important;
+        border-radius: 0 !important;
+        overflow: visible !important;
         width: 100% !important;
         max-width: 100% !important;
         margin: 0 !important;
+    }
+
+    .main-container > div:last-child {
+        padding: 0 !important;
+    }
+
+    header {
+        padding: 8px !important;
+    }
+
+    header h1 {
+        font-size: 16pt !important;
+        margin-bottom: 4px !important;
     }
 
     body.print-ledger .hide-on-ledger {
@@ -74,10 +98,18 @@ input:focus, select:focus {
     #data-table-container {
         max-height: none !important;
         overflow: visible !important;
+        margin-bottom: 8px !important;
+        border: 1px solid #000 !important;
+        border-radius: 0 !important;
     }
 
     #data-table-container table {
         font-size: 7pt !important;
+    }
+
+    #data-table-container thead,
+    #data-table-container tfoot {
+        position: static !important;
     }
 
     #data-table-container th,
@@ -131,6 +163,11 @@ input:focus, select:focus {
     .summary-grid > div > input {
         font-size: 11pt !important;
         color: #000 !important;
+    }
+
+    .sig-row {
+        margin-top: 12px !important;
+        padding-top: 8px !important;
     }
 }
 
